@@ -21,7 +21,6 @@ public class User extends Person{
     public void returnBook(Book returnedB){
         historyOfBooks.add(returnedB);
         //jämföra listan av lånade böcker på Kalle med boklistan i Library
-
         System.out.println("Du har lämnat tillbaka boken " + returnedB + ".");
     }
 

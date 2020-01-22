@@ -1,13 +1,15 @@
 package com.company;
 
+import javax.swing.*;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Library {
     ArrayList<Book> bookArray = new ArrayList<>();
     ArrayList<User> userArray = new ArrayList<>();
 
-
     public Library() {
+
 //Instantiating and adding user to userArray
         userArray.add(new User("Kalle", "kalle@kalle.com", "Kalle1"));
         System.out.println(userArray.get(0));
@@ -26,28 +28,50 @@ public class Library {
         bookArray.add(new Book("Löparna", "Olga Tokarczuk", "Frédéric Chopins syster smugglar hans konserverade hjärta över gränsen till Polen. En kvinna flyger över halva jordklotet med uppdraget att barmhärtighetsmörda sin dödssjuka tonårskärlek. En man sjunker långsamt ned i galenskap efter att hans fru och barn mystiskt försvunnit under en semesterresa, för att sedan lika mystiskt dyka upp igen. Den ryska sekten Löparna förkunnar att vägen till frälsning ligger i att aldrig slå sig till ro."));
         bookArray.add(new Book("Min fantastiska väninna. Bok 1, Barndom och tonår", "Elena Ferrante", "I en hyreskasern nära landsvägen i femtiotalets Neapel växer de båda flickorna Elena Greco och Lila Cerrullo upp och blir vänner för livet. Det är efterkrigstid, nödår och våldet präglar fortfarande Italien i form av lönnmord och godtyckliga avrättningar. Lila är den självklara ledaren, den snabbfotade, den våghalsiga, den kvicktänka och den elaka. Det är också Lila som slår Elena ur brädet som skolans bästa elev, hon har lärt sig läsa själv och kommer etta på alla prov. Skolgången utgör ett löfte om en bättre framtid för dem båda, men Lila, dotter till skomakaren Fernando och hans hustru som båda är analfabeter, är den som tvingas ge upp studierna medan Elenas far, som är vaktmästare i stadshuset, ser till att dottern får fortsätta att gå i skolan."));
 
-        //loopar Arraylistan för att skriva ut varje bok
+        writeBooklist();
+        searchByName();
+        searchByWriter();
+        lendingBook();
+    }
+
+    //utanför konstruktor
+
+    //loopar Arraylistan för att skriva ut varje bok
+    private void writeBooklist() {
         for (Book book : bookArray) {
             System.out.println(book);
         }
+    }
 
-        //Kalle lånar en bok
+    //söker på boktitel - är sorterad enligt boktitel nu
+    private void searchByName() {
+        bookArray.sort((book1, book2) -> book1.getName().compareTo(book2.getName()));
+        System.out.println(bookArray);
+    }
+
+    //söker på Författare - är sorterad enligt Författare nu... snart
+    private void searchByWriter() {
+        bookArray.sort((book1, book2) -> book1.getWriter().compareTo(book2.getWriter()));
+        System.out.println(bookArray);
+    }
+
+    //Hårdkodad utlåning nedan - Scanner i senare skede
+private void unusedMethod(){
+    //Kalle lånar en bok
         userArray.get(0).borrowBook(bookArray.get(0));
         bookArray.get(0).setAvailable(false);
 
-        //Kalle lånar en bok till
+    //Kalle lånar en bok till
         userArray.get(0).borrowBook(bookArray.get(1));
         bookArray.get(0).setAvailable(false);
 
-        //Skriver ut vilka böcker Kalle lånat
+    //Skriver ut vilka böcker Kalle lånat
         userArray.get(0).myBorrowedBooks();
+        userArray.get(0).returnBook(bookArray.get(0));
 
-        userArray.get(0).returnBook();
-
-        //skriver ut vilka böcker Kalle har kvar som lånade
+    //skriver ut vilka böcker Kalle har kvar som lånade
         userArray.get(0).myBorrowedBooks();
+}
 
-
-    }
 
 }

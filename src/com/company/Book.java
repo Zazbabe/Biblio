@@ -21,6 +21,14 @@ public class Book {
         available = availableTrue;
     }
 
+    public String getWriter(){
+        return writer;
+    }
+
+    public boolean getAvailability(){
+        return available;
+    }
+
     public String getName() {
         return name;
     }
