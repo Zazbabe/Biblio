@@ -56,22 +56,48 @@ public class Library {
     }
 
     //Hårdkodad utlåning nedan - Scanner i senare skede
-private void unusedMethod(){
-    //Kalle lånar en bok
+    private void unusedMethod() {
+        //Kalle lånar en bok
         userArray.get(0).borrowBook(bookArray.get(0));
         bookArray.get(0).setAvailable(false);
 
-    //Kalle lånar en bok till
+        //Kalle lånar en bok till
         userArray.get(0).borrowBook(bookArray.get(1));
         bookArray.get(0).setAvailable(false);
 
-    //Skriver ut vilka böcker Kalle lånat
+        //Skriver ut vilka böcker Kalle lånat
         userArray.get(0).myBorrowedBooks();
         userArray.get(0).returnBook(bookArray.get(0));
 
-    //skriver ut vilka böcker Kalle har kvar som lånade
+        //skriver ut vilka böcker Kalle har kvar som lånade
         userArray.get(0).myBorrowedBooks();
-}
+    }
+
+    //Scanner - input från användare
+    //Frågar användaren om input
+    private void lendingBook() {
+        //Får in vilken bok och lånar denna till användaren
+        Scanner in = new Scanner(System.in);
+        int booknumber = in.nextInt();
+        do {
+            System.out.println("Vilken bok vill du låna? Välj en av böckerna nedan genom att ange numret på boken.");
+            try {
+                //hantera exceptions Boken är redan utlånad & numret är out of range/bounce
+                if (booknumber > bookArray.size()) {
+                    System.out.println("ERROR: Numret finns inte i listan. Försök igen!");
+                }
+                if (bookArray.get(booknumber - 1).getAvailability() == false) {
+                    System.out.println("ERROR: Boken är redan utlånad och går ej att låna just nu!");
+                }
+            } catch (Exception e) {
+                System.out.println("Oj, nu blev något tokigt! Kontakta supporten eller försök igen!");
+            } finally {
+                System.out.println("The 'try catch' is finished.");
+            }
+        } while (!bookArray.get(booknumber).getAvailability() == true);
+                //Skriv ut och verifiera att boken är lånad
+                System.out.println("Nu har du lånat boken.");
 
 
+    }
 }
