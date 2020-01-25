@@ -10,6 +10,9 @@ public class Library {
 
     public Library() {
 
+        Login login = new Login();
+        login.logIn("Kalle", "Kalle1", "inloggning.txt");
+
 //Instantiating and adding user to userArray
         userArray.add(new User("Kalle", "kalle@kalle.com", "Kalle1"));
         System.out.println(userArray.get(0));
@@ -98,6 +101,16 @@ public class Library {
                 //Skriv ut och verifiera att boken är lånad
                 System.out.println("Nu har du lånat boken.");
 
+
+    }
+
+    //logga in
+    public void signIn(){
+
+    }
+
+    //logga ut
+    public void signOut(){
 
     }
 }
