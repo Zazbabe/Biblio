@@ -1,25 +1,77 @@
 package com.company;
 
-import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Library {
     ArrayList<Book> bookArray = new ArrayList<>();
     ArrayList<User> userArray = new ArrayList<>();
+    private boolean loggedIn = false;
 
     public Library() {
 
-        Login login = new Login();
-        login.logIn("Kalle", "Kalle1", "inloggning.txt");
+        addAllUsers();
+        addAllBooks();
 
-//Instantiating and adding user to userArray
-        userArray.add(new User("Kalle", "kalle@kalle.com", "Kalle1"));
-        System.out.println(userArray.get(0));
-        userArray.add(new User("Pelle", "pelle@pelle.com", "Pelle1"));
-        System.out.println(userArray.get(1));
+        System.out.println("1. Logga in och låna en bok.");
+        System.out.println("2. Logga in som administratör.");
+        System.out.println("3. Logga ut och avsluta.");
 
-        //byt ut böckerna till mina egna valda - ta sen bort denna kommentaren (topplistan från Bokus)
+        Scanner scanner = new Scanner(System.in);
+        String menuChoice = scanner.next();
+
+        switch (menuChoice){
+            case "1":
+                break;
+            case "2":
+                break;
+            case "3":
+                System.exit(0);
+        }
+
+        if (loggedIn = true) {
+            System.out.println("1. Låna bok.");
+            System.out.println("2. Lämna igen bok.");
+            System.out.println("3. Sök på författare.");
+            System.out.println("4. Sök på boktitel.");
+            System.out.println("5. Se dina lånade böcker.");
+            System.out.println("6. Se tillgängliga böcker.");
+            System.out.println("7. Se samtliga böcker.");
+
+            Scanner scanner1 = new Scanner(System.in);
+            String subMenuChoice = scanner.next();
+
+            switch (subMenuChoice) {
+                case "1":
+                    System.out.println("Logga in");
+                    Login login = new Login();
+                    login.logIn("Kalle", "Kalle1", "inloggning.txt");
+                    break;
+                case "2":
+                    lendingBook();
+                    break;
+                case "3":
+                    searchByWriter();
+                  break;
+                case "4":
+                    searchByName();
+                    break;
+                case "5":
+                    break;
+                case "6":
+
+                    break;
+                case "7":
+                    writeBooklist();
+                    break;
+            }
+        }
+    }
+
+    //utanför konstruktor
+
+    public void addAllBooks(){
+        //Samtliga böcker - topplistan från Bokus
         bookArray.add(new Book("Månsystern : Tiggys bok", "Lucinda Riley", "Månsystern är den femte delen i succéserien De sju systrarna som har förtrollat en hel värld."));
         bookArray.add(new Book("Klubben", "Matilda Gustavsson", "I årtionden hade han omgetts av rykten om övergrepp - den välkände kulturprofilen vars prestigefulla klubb drog till sig medlemmar ur Svenska Akademien, och där konstnärskap både föddes och dog. Den 22 november 2017 publicerades journalisten Matilda Gustavssons reportage om kulturprofilen i Dagens Nyheter, där arton kvinnor vittnade om våldtäkter, hot och trakasserier. Det inledde en händelsekedja som skulle få en av världens mest anrika kulturinstitutioner att krackelera inför öppen ridå."));
         bookArray.add(new Book("Förövarna", "Nora Roberts", "På ytan framstår Bigelows som den perfekta familjen. Men bakom stängda dörrar lever barnen Zane och Britt i ständig terror. De har lärt sig att dölja fadern Grahams våldsamma beteende för omvärlden. Ända till den dag då fjortonåriga Zane för första gången vågar säga emot."));
@@ -30,14 +82,15 @@ public class Library {
         bookArray.add(new Book("Skuggsystern : Stars bok", "Ludinca Riley", "Skuggsystern är den tredje delen i en storslagen serie om familj, kärlek och identitet, som baseras på legenden om stjärnkonstellationen Plejaderna. Star D'Aplièse står vid ett vägskäl efter hennes adoptivfars hastiga död. Han efterlämnade varsin ledtråd till Star och hennes fem systrar, en pusselbit som skulle hjälpa dem att finna sina rötter. Ett antikvariat i London blir första steget på Stars resa. Hon får nya vänner och inser att hon har kopplingar till en kvinna vid namn Flora MacNichol, som etthundra år tidigare slets mellan passionerad kärlek och sina plikter mot familjen. Floras otroliga livshistoria förändrar Star. Hon kan äntligen stiga ur sin syster CeCes skugga och öppna sitt hjärta för kärleken."));
         bookArray.add(new Book("Löparna", "Olga Tokarczuk", "Frédéric Chopins syster smugglar hans konserverade hjärta över gränsen till Polen. En kvinna flyger över halva jordklotet med uppdraget att barmhärtighetsmörda sin dödssjuka tonårskärlek. En man sjunker långsamt ned i galenskap efter att hans fru och barn mystiskt försvunnit under en semesterresa, för att sedan lika mystiskt dyka upp igen. Den ryska sekten Löparna förkunnar att vägen till frälsning ligger i att aldrig slå sig till ro."));
         bookArray.add(new Book("Min fantastiska väninna. Bok 1, Barndom och tonår", "Elena Ferrante", "I en hyreskasern nära landsvägen i femtiotalets Neapel växer de båda flickorna Elena Greco och Lila Cerrullo upp och blir vänner för livet. Det är efterkrigstid, nödår och våldet präglar fortfarande Italien i form av lönnmord och godtyckliga avrättningar. Lila är den självklara ledaren, den snabbfotade, den våghalsiga, den kvicktänka och den elaka. Det är också Lila som slår Elena ur brädet som skolans bästa elev, hon har lärt sig läsa själv och kommer etta på alla prov. Skolgången utgör ett löfte om en bättre framtid för dem båda, men Lila, dotter till skomakaren Fernando och hans hustru som båda är analfabeter, är den som tvingas ge upp studierna medan Elenas far, som är vaktmästare i stadshuset, ser till att dottern får fortsätta att gå i skolan."));
-
-        writeBooklist();
-        searchByName();
-        searchByWriter();
-        lendingBook();
     }
 
-    //utanför konstruktor
+    public void addAllUsers(){
+//Instantiating and adding user to userArray
+        userArray.add(new User("Kalle", "kalle@kalle.com", "Kalle1"));
+       // System.out.println(userArray.get(0));
+        userArray.add(new User("Pelle", "pelle@pelle.com", "Pelle1"));
+        //System.out.println(userArray.get(1));
+    }
 
     //loopar Arraylistan för att skriva ut varje bok
     private void writeBooklist() {
