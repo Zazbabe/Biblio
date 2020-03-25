@@ -1,10 +1,44 @@
 package com.company;
 
-import java.io.File;
+import java.util.ArrayList;
 import java.util.Scanner;
+import java.io.File;
 
 public class Login {
 
+    private ArrayList<User> users;
+
+    public Login (ArrayList<User> users) {
+       this.users = users;
+    }
+
+    public User doLogin(){
+        //behöver bara EN Scanner
+        Scanner input = new Scanner(System.in);
+        System.out.println("Enter Username : ");
+        String username = input.next();
+
+        System.out.println("Enter Password : ");
+        String password = input.next();
+
+        for (User user: users) {
+            if (username.equals(user.getName()) && password.equals(user.getPassword())) {
+
+                System.out.println("Access Granted! Welcome, " + user.getName() + "!");
+                //returnera vilken användare
+                return user;
+            }
+        }
+
+        System.out.println("Invalid Username or Password!");
+        //returnera tom pekare
+        return null;
+    }
+}
+
+
+
+    /*
     private static Scanner scan;
 
     private String username = "Pelle";
@@ -43,4 +77,13 @@ public class Login {
             }
 
     }
+    */
+
+    /*
+    //logga in
+    public void signIn(){
+        System.out.println("Logga in");
+        Login login = new Login();
+        login.logIn("Kalle", "Kalle1", "inloggning.txt");
     }
+     */

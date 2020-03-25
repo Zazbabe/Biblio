@@ -2,10 +2,10 @@ package com.company;
 
 public class Book {
 
-    String name;
-    String writer;
-    String description;
-    boolean available = true;
+    private String name;
+    private String writer;
+    private String description;
+    private boolean available = true;
 
     //inparametrar i konstruktorn av de lokala variablerna
     public Book(String name, String writer, String description) {

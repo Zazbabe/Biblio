@@ -4,26 +4,35 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Library {
-    ArrayList<Book> bookArray = new ArrayList<>();
-    ArrayList<User> userArray = new ArrayList<>();
-    private boolean loggedIn = false;
+    //skapar instanser (Arraylistorna) och skapar minnesplatser till dem
+    private ArrayList<Book> bookArray = new ArrayList<>();
+    private ArrayList<User> userArray = new ArrayList<>();
+    //definierar fältet loggedInUser (av klassen User) och sätter den till att det ej finns någon inloggad just nu (null)
+    private User loggedInUser;
 
     public Library() {
 
         addAllUsers();
         addAllBooks();
 
-        System.out.println("1. Logga in och låna en bok.");
-        System.out.println("2. Logga in som administratör.");
-        System.out.println("3. Logga ut och avsluta.");
+        System.out.println("1. Logga in.");
+        System.out.println("2. Registrera ny användare");
+        System.out.println("3. Avsluta.");
 
         Scanner scanner = new Scanner(System.in);
         String menuChoice = scanner.next();
 
         switch (menuChoice){
             case "1":
+                //skickar in listan av alla användare
+                Login login = new Login(userArray);
+                loggedInUser = login.doLogin();
+
+                //om dologin returnerar en user kör vidare annars skriv ut menyn igen
+
                 break;
             case "2":
+                registerNewUser();
                 break;
             case "3":
                 System.exit(0);
@@ -43,12 +52,9 @@ public class Library {
 
             switch (subMenuChoice) {
                 case "1":
-                    System.out.println("Logga in");
-                    Login login = new Login();
-                    login.logIn("Kalle", "Kalle1", "inloggning.txt");
+                    lendingBook();
                     break;
                 case "2":
-                    lendingBook();
                     break;
                 case "3":
                     searchByWriter();
@@ -70,7 +76,7 @@ public class Library {
 
     //utanför konstruktor
 
-    public void addAllBooks(){
+    private void addAllBooks(){
         //Samtliga böcker - topplistan från Bokus
         bookArray.add(new Book("Månsystern : Tiggys bok", "Lucinda Riley", "Månsystern är den femte delen i succéserien De sju systrarna som har förtrollat en hel värld."));
         bookArray.add(new Book("Klubben", "Matilda Gustavsson", "I årtionden hade han omgetts av rykten om övergrepp - den välkände kulturprofilen vars prestigefulla klubb drog till sig medlemmar ur Svenska Akademien, och där konstnärskap både föddes och dog. Den 22 november 2017 publicerades journalisten Matilda Gustavssons reportage om kulturprofilen i Dagens Nyheter, där arton kvinnor vittnade om våldtäkter, hot och trakasserier. Det inledde en händelsekedja som skulle få en av världens mest anrika kulturinstitutioner att krackelera inför öppen ridå."));
@@ -84,7 +90,7 @@ public class Library {
         bookArray.add(new Book("Min fantastiska väninna. Bok 1, Barndom och tonår", "Elena Ferrante", "I en hyreskasern nära landsvägen i femtiotalets Neapel växer de båda flickorna Elena Greco och Lila Cerrullo upp och blir vänner för livet. Det är efterkrigstid, nödår och våldet präglar fortfarande Italien i form av lönnmord och godtyckliga avrättningar. Lila är den självklara ledaren, den snabbfotade, den våghalsiga, den kvicktänka och den elaka. Det är också Lila som slår Elena ur brädet som skolans bästa elev, hon har lärt sig läsa själv och kommer etta på alla prov. Skolgången utgör ett löfte om en bättre framtid för dem båda, men Lila, dotter till skomakaren Fernando och hans hustru som båda är analfabeter, är den som tvingas ge upp studierna medan Elenas far, som är vaktmästare i stadshuset, ser till att dottern får fortsätta att gå i skolan."));
     }
 
-    public void addAllUsers(){
+    private void addAllUsers(){
 //Instantiating and adding user to userArray
         userArray.add(new User("Kalle", "kalle@kalle.com", "Kalle1"));
        // System.out.println(userArray.get(0));
@@ -154,16 +160,7 @@ public class Library {
                 //Skriv ut och verifiera att boken är lånad
                 System.out.println("Nu har du lånat boken.");
 
-
     }
 
-    //logga in
-    public void signIn(){
 
-    }
-
-    //logga ut
-    public void signOut(){
-
-    }
 }
